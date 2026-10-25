@@ -1,0 +1,21 @@
+@CloudForge.Api_HostAddress = https://localhost:7274
+### Post instances
+POST {{CloudForge.Api_HostAddress}}/api/instances
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "MyInstance",
+    "isComplete": false
+}
+
+### Get all instances
+GET {{CloudForge.Api_HostAddress}}/api/instances
+Accept: application/json
+
+### Get instance by ID
+GET {{CloudForge.Api_HostAddress}}/api/instances/1
+Accept: application/json
+
+### Delete instance
+DELETE {{CloudForge.Api_HostAddress}}/api/instances/2
