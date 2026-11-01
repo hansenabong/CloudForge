@@ -14,8 +14,16 @@ GET {{CloudForge.Api_HostAddress}}/api/instances
 Accept: application/json
 
 ### Get instance by ID
-GET {{CloudForge.Api_HostAddress}}/api/instances/1
+GET {{CloudForge.Api_HostAddress}}/api/instances/2
 Accept: application/json
 
 ### Delete instance
 DELETE {{CloudForge.Api_HostAddress}}/api/instances/2
+
+### Start instance
+POST {{CloudForge.Api_HostAddress}}/api/instances/1/start
+Accept: application/json
+### Stop instance
+POST {{CloudForge.Api_HostAddress}}/api/instances/1/stop
+Accept: application/json
+

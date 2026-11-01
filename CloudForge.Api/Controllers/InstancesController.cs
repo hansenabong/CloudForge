@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CloudForge.Api.Models;
+using System.ComponentModel.Design;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -90,7 +91,44 @@ public class InstancesController : ControllerBase
 
         return NoContent();
     }
+    // POST: api/Instances/5/start
+    [HttpPost("{id}/start")]
+    public async Task<ActionResult<Instances>> StartInstances(long id)
+    {
+        var instances = await _context.Instances.FindAsync(id);
+        if (instances == null)
+        {
+            return NotFound();
+        }
+        if (instances.Active)
+        {
+            return Ok(instances);
+        }
+        await Task.Delay(2000);
+        instances.Active = true;
+        await _context.SaveChangesAsync();
+        return Ok(instances);
 
+    }
+    // POST: api/Instances/5/stop
+    [HttpPost("{id}/stop")]
+    public async Task<ActionResult<Instances>> StopInstances(long id)
+    {
+        var instances = await _context.Instances.FindAsync(id);
+        if (instances == null)
+        {
+            return NotFound();
+        }
+        if (!instances.Active)
+        {
+            return Ok(instances);
+        }
+        await Task.Delay(2000);
+        instances.Active = false;
+        await _context.SaveChangesAsync();
+        return Ok(instances);
+
+    }
     private bool InstancesExists(long? id)
     {
         return _context.Instances.Any(e => e.Id == id);
